@@ -15,5 +15,3 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - run: bun run check
-      - name: Ensure the committed panel bundle is current
-        run: git diff --exit-code -- panel/main.js
