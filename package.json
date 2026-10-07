@@ -1,6 +1,6 @@
 {
   "name": "openchamber-prompt-studio",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A guided, local-first prompt writing studio for OpenChamber.",
   "license": "MIT",
   "private": false,

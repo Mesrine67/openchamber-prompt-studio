@@ -58,7 +58,7 @@ Targets OpenChamber `>=2.0.0` and uses `@openchamber/sdk` 2.1.1. A Small Model m
 1. Update `version` in `package.json` and add a matching entry to `CHANGELOG.md`.
 2. Run `bun install` if dependency metadata changed, then run `bun run check`.
 3. Commit the generated `panel/main.js` with the source changes.
-4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.1` to pin a release.
+4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.2` to pin a release.
 5. In OpenChamber, open **Settings → Extensions** to check for updates; Git-installed extensions are checked at most once an hour there. **Check for updates** requests an immediate check.
 
 See the [OpenChamber extension update guide](https://docs.openchamber.dev/extensions/#update) for branch and tag behavior.

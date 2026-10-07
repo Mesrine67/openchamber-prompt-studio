@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2 - 2026-10-07
+
+- Replace starburst-like marks and placeholder glyphs with an original prompt/chat identity and consistent line icons.
+- Refine icon buttons and welcome/example surfaces toward a restrained ChatGPT/Codex-style interface while preserving OpenChamber theme colors.
+
 ## 0.2.1 - 2026-10-07
 
 - Fix extension installation by declaring only directly supported capabilities; the session action derives conversation access from its messages payload.

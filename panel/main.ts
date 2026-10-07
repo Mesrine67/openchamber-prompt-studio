@@ -185,13 +185,21 @@ function textElement<K extends keyof HTMLElementTagNameMap>(tag: K, text: string
   return element;
 }
 
+const icons = {
+  prompt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4.75h8l4 4v10.5H6z"/><path d="M14 4.75v4h4M9 12h6M9 15.5h6"/></svg>',
+  code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8.5 7-5 5 5 5M15.5 7l5 5-5 5M13.5 5l-3 14"/></svg>',
+  debug: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 8.5h6a3 3 0 0 1 3 3v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4v-4a3 3 0 0 1 3-3ZM9 8.5V6a3 3 0 0 1 6 0v2.5M3.5 11h3M17.5 11h3M4.5 17h3M16.5 17h3M12 12v4"/></svg>',
+  research: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4.2 4.2"/></svg>',
+  writing: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 16.5-.8 4.3 4.3-.8L19 8.5 15.5 5 4 16.5Z"/><path d="m13.8 6.7 3.5 3.5M4 21h16"/></svg>',
+};
+
 function render(): void {
   root.innerHTML = `
     <header class="topbar">
       <div class="brand-mark" aria-hidden="true"><img src="../icon.svg" alt="" /></div>
       <div class="brand-copy"><p class="eyebrow">${t("eyebrow")}</p><h1>${t("title")}</h1></div>
       <div class="top-actions">
-        <button class="icon-button" type="button" data-action="new" title="${escapeAttribute(t("newChat"))}" aria-label="${escapeAttribute(t("newChat"))}">＋</button>
+        <button class="icon-button" type="button" data-action="new" title="${escapeAttribute(t("newChat"))}" aria-label="${escapeAttribute(t("newChat"))}">${icons.prompt}</button>
         <button class="quiet-button" type="button" data-action="library">${t("library")}${state.library.length ? `<span class="count-pill">${state.library.length}</span>` : ""}</button>
       </div>
     </header>
@@ -256,7 +264,7 @@ function renderChat(): void {
     }
     const welcome = document.createElement("div");
     welcome.className = "welcome-card";
-    welcome.innerHTML = `<div class="welcome-orb" aria-hidden="true">✳</div><h2>${t("welcomeTitle")}</h2><p>${t("welcomeBody")}</p><span class="quality-pill">${t("beginnerLabel")}</span>`;
+    welcome.innerHTML = `<div class="welcome-orb" aria-hidden="true">${icons.prompt}</div><h2>${t("welcomeTitle")}</h2><p>${t("welcomeBody")}</p><span class="quality-pill">${t("beginnerLabel")}</span>`;
     messages.append(welcome);
 
     const examplesLabel = textElement("p", t("examplesLabel"), "examples-label");
@@ -268,7 +276,9 @@ function renderChat(): void {
       button.className = "example-card";
       button.type = "button";
       button.dataset.example = String(index);
-      const icon = textElement("span", ["⌘", "⌕", "↗", "✎"][index] ?? "✳", "example-icon");
+      const icon = document.createElement("span");
+      icon.className = "example-icon";
+      icon.innerHTML = [icons.code, icons.debug, icons.research, icons.writing][index] ?? icons.prompt;
       button.append(icon, textElement("span", labels[index] ?? "", "example-title"));
       chips.append(button);
     });
@@ -286,7 +296,7 @@ function renderChat(): void {
 
   const canFinalize = state.messages.some((message) => message.role === "user") && !busy;
   composer.innerHTML = `
-    ${state.messages.length ? `<div class="finish-row"><span>${t("smallModel")}</span><button class="finish-button" type="button" data-action="finish" ${canFinalize ? "" : "disabled"}>✦ ${t("finish")}</button></div>` : ""}
+    ${state.messages.length ? `<div class="finish-row"><span>${t("smallModel")}</span><button class="finish-button" type="button" data-action="finish" ${canFinalize ? "" : "disabled"}>${icons.prompt}<span>${t("finish")}</span></button></div>` : ""}
     <form id="message-form" class="composer">
       <label class="sr-only" for="message-input">${escapeAttribute(t("placeholder"))}</label>
       <textarea id="message-input" maxlength="${MAX_MESSAGE_LENGTH}" rows="2" placeholder="${escapeAttribute(t("placeholder"))}" ${busy ? "disabled" : ""}></textarea>
