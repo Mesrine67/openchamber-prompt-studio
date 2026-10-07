@@ -25,7 +25,7 @@ For a local checkout:
 2. Add its folder in **Settings → Extensions**.
 3. Enable **Prompt Studio** and open its panel.
 
-To seed Prompt Studio with the discussion you are currently in, open that chat's session menu and choose **Create prompt from this conversation**. OpenChamber asks for the `conversation` permission because the selected discussion text is sent to the configured model when you send a coaching message or finalize the prompt. The rail panel receives project/session metadata but cannot read the transcript unless you launch this explicit session action.
+To seed Prompt Studio with the discussion you are currently in, open that chat's session menu and choose **Créer un prompt depuis cette discussion**. OpenChamber asks for the `conversation` permission because the selected discussion text is sent to the configured model when you send a coaching message or finalize the prompt. The rail panel receives project/session metadata but cannot read the transcript unless you launch this explicit session action.
 
 ## Build from source
 
@@ -58,7 +58,7 @@ Targets OpenChamber `>=2.0.0` and uses `@openchamber/sdk` 2.1.1. A Small Model m
 1. Update `version` in `package.json` and add a matching entry to `CHANGELOG.md`.
 2. Run `bun install` if dependency metadata changed, then run `bun run check`.
 3. Commit the generated `panel/main.js` with the source changes.
-4. Push the version change to the Git branch users install. If you publish a fixed release channel, tag it (for example, `v0.1.0`) and tell users to install the repository URL with `#v0.1.0`.
+4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.0` to pin a release.
 5. In OpenChamber, open **Settings → Extensions** to check for updates; Git-installed extensions are checked at most once an hour there. **Check for updates** requests an immediate check.
 
 See the [OpenChamber extension update guide](https://docs.openchamber.dev/extensions/#update) for branch and tag behavior.
