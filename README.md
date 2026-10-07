@@ -25,7 +25,7 @@ For a local checkout:
 2. Add its folder in **Settings → Extensions**.
 3. Enable **Prompt Studio** and open its panel.
 
-To seed Prompt Studio with the discussion you are currently in, open that chat's session menu and choose **Créer un prompt depuis cette discussion**. OpenChamber asks for the `conversation` permission because the selected discussion text is sent to the configured model when you send a coaching message or finalize the prompt. The rail panel receives project/session metadata but cannot read the transcript unless you launch this explicit session action.
+To seed Prompt Studio with the discussion you are currently in, open that chat's session menu and choose **Créer un prompt depuis cette discussion**. The session action declares `payload: ["messages"]`, which lets OpenChamber derive the `conversation` permission for that action. The selected discussion text is sent to the configured model only when you send a coaching message or finalize the prompt. The rail panel receives project/session metadata but cannot read the transcript unless you launch this explicit session action.
 
 ## Build from source
 
@@ -40,7 +40,7 @@ bun run check
 
 ## Privacy and permissions
 
-Prompt Studio requests the OpenChamber `model` capability and, for its explicit session action, `conversation`. It does not add a server, make direct network requests, load remote scripts, collect analytics, or ask for API keys.
+Prompt Studio requests the OpenChamber `model` capability. Its explicit session action requests the `conversation` permission through its `payload: ["messages"]` declaration. It does not add a server, make direct network requests, load remote scripts, collect analytics, or ask for API keys.
 
 - The conversation and final-prompt request are sent to the Small Model configured in OpenChamber only after you submit a message or click **Create final prompt**. Model-provider policies, token usage, and any provider charges are controlled by your OpenChamber configuration.
 - Imported chat context is opt-in: it is provided only when you open Prompt Studio from **Create prompt from this conversation**. The extension limits the context to the latest 60 messages and 24,000 characters, does not persist imported transcript text in its prompt library, and offers **Remove context**. The active project directory and session title are passed as context when generation is requested.
@@ -58,7 +58,7 @@ Targets OpenChamber `>=2.0.0` and uses `@openchamber/sdk` 2.1.1. A Small Model m
 1. Update `version` in `package.json` and add a matching entry to `CHANGELOG.md`.
 2. Run `bun install` if dependency metadata changed, then run `bun run check`.
 3. Commit the generated `panel/main.js` with the source changes.
-4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.0` to pin a release.
+4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.1` to pin a release.
 5. In OpenChamber, open **Settings → Extensions** to check for updates; Git-installed extensions are checked at most once an hour there. **Check for updates** requests an immediate check.
 
 See the [OpenChamber extension update guide](https://docs.openchamber.dev/extensions/#update) for branch and tag behavior.

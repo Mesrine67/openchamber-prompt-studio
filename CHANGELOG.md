@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 - 2026-10-07
+
+- Fix extension installation by declaring only directly supported capabilities; the session action derives conversation access from its messages payload.
+
 ## 0.2.0 - 2026-10-07
 
 - Add an explicit session action to seed prompt generation from the selected OpenChamber conversation.
