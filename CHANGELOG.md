@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3 - 2026-10-07
+
+- Add agent and model target preferences, including current-session values and custom identifiers, to guide prompt generation.
+- Use OpenChamber UI Kit selects, fields, and button for themed target controls and message submission.
+- Clarify that target preferences shape the generated prompt and do not change the active chat's agent or model.
+
 ## 0.2.2 - 2026-10-07
 
 - Replace starburst-like marks and placeholder glyphs with an original prompt/chat identity and consistent line icons.

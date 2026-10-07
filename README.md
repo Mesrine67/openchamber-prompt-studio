@@ -14,6 +14,9 @@
 - Follows the host theme and supports French and English.
 - Uses the active project/session title automatically; a session menu action can import the current conversation as optional context.
 - Generates through OpenChamber's configured Small Model/provider. It never calls a model provider directly.
+- Lets you target the current session's agent/model, enter custom target identifiers, or leave either unspecified. Targets guide the generated prompt; they do not switch the active chat's execution settings.
+
+The extension SDK exposes the active session's selected agent and model, but does not expose the configured agent/model catalog or a command to change the active chat's selection. Prompt Studio therefore does not invent a model list or claim to switch providers. The coach uses the configured OpenChamber Small Model; the generated prompt can mention the selected target, while OpenChamber's own chat selectors still choose what executes it.
 
 ## Install
 
@@ -58,7 +61,7 @@ Targets OpenChamber `>=2.0.0` and uses `@openchamber/sdk` 2.1.1. A Small Model m
 1. Update `version` in `package.json` and add a matching entry to `CHANGELOG.md`.
 2. Run `bun install` if dependency metadata changed, then run `bun run check`.
 3. Commit the generated `panel/main.js` with the source changes.
-4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.2` to pin a release.
+4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.3` to pin this release.
 5. In OpenChamber, open **Settings → Extensions** to check for updates; Git-installed extensions are checked at most once an hour there. **Check for updates** requests an immediate check.
 
 See the [OpenChamber extension update guide](https://docs.openchamber.dev/extensions/#update) for branch and tag behavior.
