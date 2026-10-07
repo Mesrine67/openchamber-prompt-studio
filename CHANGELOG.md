@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.4 - 2026-10-08
+
+- Align the composer, welcome state and controls with OpenChamber surface, radius and theme tokens.
+- Respect light and dark color schemes and remove the lifted hover effect from the send button.
+
 ## 0.2.3 - 2026-10-07
 
 - Add agent and model target preferences, including current-session values and custom identifiers, to guide prompt generation.
