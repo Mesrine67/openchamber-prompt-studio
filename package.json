@@ -1,0 +1,45 @@
+{
+  "name": "openchamber-prompt-studio",
+  "version": "0.2.0",
+  "description": "A guided, local-first prompt writing studio for OpenChamber.",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "bunx openchamber-guest-bundle panel/main.ts panel/main.js",
+    "typecheck": "tsc --noEmit",
+    "check": "bun run typecheck && bun run build"
+  },
+  "dependencies": {
+    "@openchamber/sdk": "2.1.1"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  },
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": {
+      "openchamber": ">=2.0.0"
+    },
+    "contributes": {
+      "panel": {
+        "id": "openchamber-prompt-studio",
+        "name": "Prompt Studio",
+        "icon": "icon.svg",
+        "entry": "panel/index.html"
+      },
+      "capabilities": [
+        "model",
+        "conversation"
+      ],
+      "actions": [
+        {
+          "id": "build-from-session",
+          "label": "Créer un prompt depuis cette discussion",
+          "where": "session",
+          "payload": ["messages"]
+        }
+      ]
+    }
+  }
+}
