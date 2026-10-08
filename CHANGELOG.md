@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0 - 2026-10-08
+
+- Refine the guided prompt flow with a clearer welcome state, larger controls, and a compact composer.
+- Move optional agent and model preferences behind a disclosure so prompt writing stays the main task.
+- Improve French and English copy, clarify when imported context is sent, and confirm before clearing an active draft.
+- Keep the editor actions readable in narrow panels and localize its accessible label.
+
 ## 0.2.4 - 2026-10-08
 
 - Align the composer, welcome state and controls with OpenChamber surface, radius and theme tokens.

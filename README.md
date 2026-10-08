@@ -1,6 +1,6 @@
 # Prompt Studio for OpenChamber
 
-**Prompt Express** is a small, focused OpenChamber panel for turning a rough idea into a clear, self-contained prompt. It asks a few useful questions, drafts the final prompt, and lets you review, edit, save, copy, or place it in the OpenChamber composer.
+**Prompt Studio** is a focused OpenChamber panel for turning a rough idea into a clear, self-contained prompt. It asks a few useful questions, drafts the final prompt, and lets you review, edit, save, copy, or place it in the OpenChamber composer.
 
 > French UI is available automatically when OpenChamber uses French. The extension never sends the prompt to a session: **Insert in chat** only fills the composer, and you decide whether to send it.
 
@@ -61,7 +61,7 @@ Targets OpenChamber `>=2.0.0` and uses `@openchamber/sdk` 2.1.1. A Small Model m
 1. Update `version` in `package.json` and add a matching entry to `CHANGELOG.md`.
 2. Run `bun install` if dependency metadata changed, then run `bun run check`.
 3. Commit the generated `panel/main.js` with the source changes.
-4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.2.3` to pin this release.
+4. Push the version change to the Git branch users install. A `v*` tag runs the release workflow; install the repository URL with `#v0.3.0` to pin this release.
 5. In OpenChamber, open **Settings → Extensions** to check for updates; Git-installed extensions are checked at most once an hour there. **Check for updates** requests an immediate check.
 
 See the [OpenChamber extension update guide](https://docs.openchamber.dev/extensions/#update) for branch and tag behavior.

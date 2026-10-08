@@ -31,17 +31,17 @@ const MAX_TARGET_LABEL_LENGTH = 160;
 
 const copy = {
   fr: {
-    title: "Prompt Express",
+    title: "Prompt Studio",
     eyebrow: "ATELIER DE PROMPTS",
-    subtitle: "Transforme une idée en consignes claires et exploitables.",
-    newChat: "Nouveau",
+    subtitle: "Clarifie ta demande, puis repars avec un prompt prêt à l’emploi.",
+    newChat: "Nouveau prompt",
     library: "Mes prompts",
     importedContext: "Discussion OpenChamber importée",
-    importedContextDetail: (value: string | number) => `${Number(value)} messages transmis au modèle configuré dans OpenChamber.`,
+    importedContextDetail: (value: string | number) => `${Number(value)} messages pourront servir de contexte quand tu lanceras le coach.`,
     clearContext: "Retirer le contexte",
-    welcomeTitle: "On construit ton prompt ensemble.",
-    welcomeBody: "Décris ton besoin comme tu l’expliquerais à un collègue. Je t’aide à préciser l’objectif, le contexte, les contraintes et le résultat attendu.",
-    smallModel: "Le petit modèle configuré dans OpenChamber sera utilisé seulement quand tu envoies un message ou demandes le prompt final.",
+    welcomeTitle: "Qu’est-ce que tu veux demander ?",
+    welcomeBody: "Décris ton objectif avec tes mots. Le coach t’aidera à préciser le contexte, les limites et le résultat attendu.",
+    smallModel: "Le Petit Modèle OpenChamber aide à rédiger. Il n’exécute pas la tâche.",
     examplesLabel: "Démarrer avec un exemple",
     exampleCode: "Développement",
     exampleDebug: "Débogage",
@@ -50,8 +50,8 @@ const copy = {
     placeholder: "Explique ce que tu veux obtenir…",
     send: "Envoyer",
     sendHint: "Entrée pour envoyer · Maj+Entrée pour une nouvelle ligne",
-    targetHeading: "Cible du prompt",
-    targetDescription: "Ces choix guident le prompt final. Le coach utilise le Petit Modèle OpenChamber; l’exécution reste pilotée par les sélecteurs du chat.",
+    targetHeading: "Cible facultative",
+    targetDescription: "Ajoute un agent ou un modèle comme préférence dans le prompt final. Cela ne change pas les sélecteurs du chat.",
     targetAgent: "Agent",
     targetModel: "Modèle",
     targetSession: (value: string | number) => `Session actuelle${value ? ` · ${String(value)}` : " · non défini"}`,
@@ -61,12 +61,12 @@ const copy = {
     targetModelPlaceholder: "Identifiant du modèle, ex. openai/gpt-…",
     targetAgentHelper: "Préférence incluse dans le prompt final; ne change pas l’agent du chat.",
     targetModelHelper: "Préférence incluse dans le prompt final; ne change pas le modèle du chat.",
-    targetNotAvailable: "OpenChamber ne fournit pas la liste des agents et modèles à cette extension.",
+    targetNotAvailable: "Cette préférence sera écrite dans le prompt, sans modifier la session.",
     finish: "Créer le prompt final",
     working: "Le coach prépare une réponse…",
     finalizing: "Construction du prompt…",
-    resultTitle: "Ton prompt est prêt à relire",
-    resultHint: "Relis-le et ajuste-le. Le modèle choisi reste celui de ta session OpenChamber.",
+    resultTitle: "Ton prompt est prêt",
+    resultHint: "Relis-le et ajuste-le avant de le copier ou de l’insérer dans le chat.",
     promptName: "Nom du prompt",
     promptPlaceholder: "Ex. Corriger un bug sans régression",
     copy: "Copier",
@@ -77,7 +77,7 @@ const copy = {
     inserted: "Prompt inséré dans le champ de chat.",
     saved: "Prompt enregistré dans ta bibliothèque.",
     savedTitle: "Bibliothèque de prompts",
-    savedEmpty: "Aucun prompt enregistré pour le moment.",
+    savedEmpty: "Ta bibliothèque est vide. Crée un prompt, puis choisis Enregistrer pour le garder ici.",
     use: "Ouvrir",
     delete: "Supprimer",
     deleteConfirm: "Supprimer ce prompt de la bibliothèque ?",
@@ -92,20 +92,22 @@ const copy = {
     charCount: (value: string | number) => `${Number(value)} caractères`,
     savedAt: (value: string | number) => `Modifié ${String(value)}`,
     newDraftTitle: "Nouveau prompt",
+    newConfirm: "Commencer un nouveau prompt ? Le brouillon en cours sera effacé.",
+    promptOutput: "Prompt final",
     beginnerLabel: "Clair · concret · prêt à l’emploi",
   },
   en: {
-    title: "Prompt Express",
+    title: "Prompt Studio",
     eyebrow: "PROMPT STUDIO",
-    subtitle: "Turn a rough idea into clear, useful instructions.",
-    newChat: "New",
+    subtitle: "Clarify your request, then leave with a prompt ready to use.",
+    newChat: "New prompt",
     library: "My prompts",
     importedContext: "OpenChamber conversation imported",
-    importedContextDetail: (value: string | number) => `${Number(value)} messages will be sent to your configured OpenChamber model.`,
+    importedContextDetail: (value: string | number) => `${Number(value)} messages can provide context when you start the coach.`,
     clearContext: "Remove context",
-    welcomeTitle: "Let’s build your prompt together.",
-    welcomeBody: "Describe what you need as you would to a teammate. I’ll help clarify the goal, context, constraints, and expected result.",
-    smallModel: "Your OpenChamber Small Model runs only when you send a message or ask for the final prompt.",
+    welcomeTitle: "What do you want to ask for?",
+    welcomeBody: "Describe your goal in your own words. The coach will help clarify context, boundaries, and the result you expect.",
+    smallModel: "OpenChamber Small Model helps write the prompt. It does not carry out the task.",
     examplesLabel: "Start with an example",
     exampleCode: "Build",
     exampleDebug: "Debug",
@@ -114,8 +116,8 @@ const copy = {
     placeholder: "Describe what you want to achieve…",
     send: "Send",
     sendHint: "Enter to send · Shift+Enter for a new line",
-    targetHeading: "Prompt target",
-    targetDescription: "These choices guide the final prompt. The coach uses OpenChamber Small Model; execution remains controlled by the chat selectors.",
+    targetHeading: "Optional target",
+    targetDescription: "Add an agent or model as a preference in the final prompt. This does not change the chat selectors.",
     targetAgent: "Agent",
     targetModel: "Model",
     targetSession: (value: string | number) => `Current session${value ? ` · ${String(value)}` : " · not set"}`,
@@ -125,12 +127,12 @@ const copy = {
     targetModelPlaceholder: "Model ID, e.g. openai/gpt-…",
     targetAgentHelper: "Included as a preference in the final prompt; does not change the chat agent.",
     targetModelHelper: "Included as a preference in the final prompt; does not change the chat model.",
-    targetNotAvailable: "OpenChamber does not expose the list of agents and models to this extension.",
+    targetNotAvailable: "This preference is written into the prompt without changing the session.",
     finish: "Create final prompt",
     working: "The coach is preparing a reply…",
     finalizing: "Building your prompt…",
-    resultTitle: "Your prompt is ready to review",
-    resultHint: "Review and edit it. Your OpenChamber session keeps its selected model.",
+    resultTitle: "Your prompt is ready",
+    resultHint: "Review and edit it before copying or placing it in the chat.",
     promptName: "Prompt name",
     promptPlaceholder: "e.g. Fix a bug without regressions",
     copy: "Copy",
@@ -141,7 +143,7 @@ const copy = {
     inserted: "Prompt placed in the chat composer.",
     saved: "Prompt saved to your library.",
     savedTitle: "Prompt library",
-    savedEmpty: "No saved prompts yet.",
+    savedEmpty: "Your library is empty. Create a prompt, then choose Save to keep it here.",
     use: "Open",
     delete: "Delete",
     deleteConfirm: "Remove this prompt from your library?",
@@ -156,6 +158,8 @@ const copy = {
     charCount: (value: string | number) => `${Number(value)} characters`,
     savedAt: (value: string | number) => `Edited ${String(value)}`,
     newDraftTitle: "New prompt",
+    newConfirm: "Start a new prompt? Your current draft will be cleared.",
+    promptOutput: "Final prompt",
     beginnerLabel: "Clear · concrete · ready to use",
   },
 } satisfies Record<Locale, Record<string, string | ((value: string | number) => string)>>;
@@ -244,7 +248,7 @@ function render(): void {
         <button class="quiet-button" type="button" data-action="library">${t("library")}${state.library.length ? `<span class="count-pill">${state.library.length}</span>` : ""}</button>
       </div>
     </header>
-    <p class="subtitle">${t("subtitle")}</p>
+    ${state.view === "chat" ? `<p class="subtitle">${t("subtitle")}</p>` : ""}
     <div id="notice" class="notice" role="status" ${notice ? "" : "hidden"}></div>
     <section id="chat-view" class="view" ${state.view === "chat" ? "" : "hidden"}>
       <div id="messages" class="messages" role="log" aria-live="polite" aria-label="${escapeAttribute(t("title"))}"></div>
@@ -255,11 +259,11 @@ function render(): void {
       <label class="field-label" for="prompt-title">${t("promptName")}</label>
       <input id="prompt-title" class="text-input" maxlength="80" placeholder="${escapeAttribute(t("promptPlaceholder"))}" value="${escapeAttribute(state.title)}" />
       <label class="field-label prompt-label" for="prompt-output">Prompt</label>
-      <textarea id="prompt-output" class="prompt-output" spellcheck="true" maxlength="${MAX_PROMPT_LENGTH}" aria-label="Prompt final" placeholder="${escapeAttribute(t("noConversation"))}">${escapeAttribute(state.prompt)}</textarea>
-      <div class="result-footer"><span id="prompt-count" class="char-count"></span><button class="quiet-button" type="button" data-action="back">${t("back")}</button><div class="result-actions"><button class="secondary-button" type="button" data-action="copy">${t("copy")}</button><button class="secondary-button" type="button" data-action="save">${t("save")}</button><button class="primary-button" type="button" data-action="insert">${t("insert")}<span aria-hidden="true">↗</span></button></div></div>
+      <textarea id="prompt-output" class="prompt-output" spellcheck="true" maxlength="${MAX_PROMPT_LENGTH}" aria-label="${escapeAttribute(t("promptOutput"))}" placeholder="${escapeAttribute(t("noConversation"))}">${escapeAttribute(state.prompt)}</textarea>
+      <div class="result-footer"><div class="result-meta"><span id="prompt-count" class="char-count"></span><button class="quiet-button" type="button" data-action="back">${t("back")}</button></div><div class="result-actions"><button class="secondary-button" type="button" data-action="copy">${t("copy")}</button><button class="secondary-button" type="button" data-action="save">${t("save")}</button><button class="primary-button" type="button" data-action="insert">${t("insert")}<span aria-hidden="true">↗</span></button></div></div>
     </section>
     <section id="library-view" class="view library-view" ${state.view === "library" ? "" : "hidden"}>
-      <div class="library-heading"><div><p class="eyebrow">${t("eyebrow")}</p><h2>${t("savedTitle")}</h2></div><button class="quiet-button" type="button" data-action="back">${t("back")}</button></div>
+      <div class="library-heading"><h2>${t("savedTitle")}</h2><button class="quiet-button" type="button" data-action="back">${t("back")}</button></div>
       <div id="library-list" class="library-list"></div>
     </section>
     <div id="loading" class="loading-state" ${loading ? "" : "hidden"}><span class="spinner" aria-hidden="true"></span>${t("loading")}</div>
@@ -296,11 +300,6 @@ function renderChat(): void {
       clear.type = "button";
       clear.dataset.action = "clear-context";
       contextCard.append(label, detail, clear);
-      messages.append(contextCard);
-    } else if (projectContext.sessionTitle || projectContext.directory) {
-      const contextCard = document.createElement("aside");
-      contextCard.className = "notice context-notice";
-      contextCard.textContent = [projectContext.sessionTitle, projectContext.directory].filter(Boolean).join(" · ");
       messages.append(contextCard);
     }
     const welcome = document.createElement("div");
@@ -339,15 +338,16 @@ function renderChat(): void {
   composer.innerHTML = `
     ${state.messages.length ? `<div class="finish-row"><span>${t("smallModel")}</span><button class="finish-button" type="button" data-action="finish" ${canFinalize ? "" : "disabled"}>${icons.prompt}<span>${t("finish")}</span></button></div>` : ""}
     <form id="message-form" class="composer">
-      <section class="target-controls" aria-label="${escapeAttribute(t("targetHeading"))}">
-        <div class="target-heading"><strong>${t("targetHeading")}</strong><span>${t("targetDescription")}</span></div>
+      <details class="target-controls" ${state.targetAgentMode === "custom" || state.targetModelMode === "custom" ? "open" : ""}>
+        <summary class="target-summary">${t("targetHeading")}</summary>
+        <p class="target-description">${t("targetDescription")}</p>
         <div class="target-selects"><div id="target-agent-select"></div><div id="target-model-select"></div></div>
         <div class="target-custom-fields">
           <div id="target-agent-custom" ${state.targetAgentMode === "custom" ? "" : "hidden"}></div>
           <div id="target-model-custom" ${state.targetModelMode === "custom" ? "" : "hidden"}></div>
         </div>
         <p id="target-session-note" class="target-session-note"></p>
-      </section>
+      </details>
       <label class="sr-only" for="message-input">${escapeAttribute(t("placeholder"))}</label>
       <textarea id="message-input" maxlength="${MAX_MESSAGE_LENGTH}" rows="2" placeholder="${escapeAttribute(t("placeholder"))}" ${busy ? "disabled" : ""}></textarea>
       <div class="composer-bottom"><span class="send-hint">${t("sendHint")}</span><div id="send-button-slot"></div></div>
@@ -433,7 +433,7 @@ function updateTargetSessionDetails(): void {
   modelModeSelect?.update({ options: targetModeOptions("model") });
   const note = root.querySelector<HTMLElement>("#target-session-note");
   if (note) {
-    const parts = [currentSession?.agent && `Agent: ${currentSession.agent}`, currentSession?.model && `Modèle: ${currentSession.model}`].filter(Boolean);
+    const parts = [currentSession?.agent && `${t("targetAgent")}: ${currentSession.agent}`, currentSession?.model && `${t("targetModel")}: ${currentSession.model}`].filter(Boolean);
     note.textContent = parts.length ? `${t("targetNotAvailable")} ${parts.join(" · ")}` : t("targetNotAvailable");
     note.title = parts.join(" · ");
   }
@@ -579,6 +579,7 @@ async function handleAction(action: string): Promise<void> {
     return;
   }
   if (action === "new") {
+    if ((state.messages.length > 0 || state.prompt.trim()) && !window.confirm(t("newConfirm"))) return;
     state = { ...state, messages: [], prompt: "", title: "", view: "chat" };
     notice = "";
     queueSave();
@@ -861,6 +862,8 @@ function makeId(): string {
 
 host.onReady((context) => {
   locale = context.locale?.toLowerCase().startsWith("fr") ? "fr" : "en";
+  document.documentElement.lang = locale;
+  document.title = t("title");
   projectContext = { directory: context.directory, sessionTitle: context.session?.title ?? null };
   currentSession = context.session ? { agent: context.session.agent, model: context.session.model } : null;
   if (context.item?.kind === "session" && context.item.action === "build-from-session") {
